@@ -1,0 +1,9 @@
+.terraform/
+.vscode/
+*.plan
+*.tfstate
+*.state
+*.backup
+*.orig
+*.out
+*.log
