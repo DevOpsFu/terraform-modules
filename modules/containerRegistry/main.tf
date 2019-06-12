@@ -1,6 +1,6 @@
 module "resourceGroup" {
   source   = "../../resources/base/resourceGroup"
-  name     = "${var.registryName}"
+  name     = "${local.resourceGroupName}"
   location = "${var.location}"
 }
 
