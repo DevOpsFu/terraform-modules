@@ -1,5 +1,6 @@
-variable "name" {}
+variable "name" {
+}
 
-variable "location" {}
-
+variable "location" {
+}
 

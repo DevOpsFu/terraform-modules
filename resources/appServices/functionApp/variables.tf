@@ -1,16 +1,23 @@
-variable "name" {}
+variable "name" {
+}
 
-variable "resourceGroupName" {}
+variable "resourceGroupName" {
+}
 
-variable "location" {}
+variable "location" {
+}
 
-variable "appServicePlanId" {}
+variable "appServicePlanId" {
+}
 
-variable "storageConnectionString" {}
+variable "storageConnectionString" {
+}
 
-variable "runtimeVersion" {}
+variable "runtimeVersion" {
+}
 
 variable "appSettings" {
-  type    = "map"
+  type    = map(string)
   default = {}
 }
+

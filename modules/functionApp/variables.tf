@@ -1,10 +1,14 @@
-variable "orgName" {}
+variable "orgName" {
+}
 
-variable "appName" {}
+variable "appName" {
+}
 
-variable "location" {}
+variable "location" {
+}
 
 variable "appSettings" {
-  type    = "map"
+  type    = map(string)
   default = {}
 }
+

@@ -1,11 +1,18 @@
-variable "name" {}
+variable "name" {
+}
 
-variable "resourceGroupName" {}
+variable "resourceGroupName" {
+}
 
-variable "location" {}
+variable "location" {
+}
 
-variable "kind" {}
+variable "kind" {
+}
 
-variable "tier" {}
+variable "tier" {
+}
 
-variable "size" {}
+variable "size" {
+}
+

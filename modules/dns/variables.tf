@@ -1,18 +1,23 @@
-variable "zoneName" {}
+variable "zoneName" {
+  type = string
+}
 
 variable "cnameRecords" {
-  type    = "map"
+  type    = map(string)
   default = {}
 }
 
 variable "aRecords" {
-  type    = "map"
+  type    = map(list(string))
   default = {}
 }
 
 variable "txtRecords" {
-  type    = "map"
+  type    = map(string)
   default = {}
 }
 
-variable "location" {}
+variable "location" {
+  type = string
+}
+

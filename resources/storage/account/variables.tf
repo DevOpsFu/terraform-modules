@@ -1,9 +1,15 @@
-variable "name" {}
+variable "name" {
+}
 
-variable "resourceGroupName" {}
+variable "resourceGroupName" {
+}
 
-variable "location" {}
+variable "location" {
+}
 
-variable "tier" {}
+variable "tier" {
+}
 
-variable "replicationType" {}
+variable "replicationType" {
+}
+

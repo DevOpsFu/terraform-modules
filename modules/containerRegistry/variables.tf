@@ -1,7 +1,12 @@
-variable "registryName" {}
+variable "registryName" {
+}
 
-variable "location" {}
+variable "location" {
+}
 
-variable "sku" {}
+variable "sku" {
+}
 
-variable "adminEnabled" {}
+variable "adminEnabled" {
+}
+
