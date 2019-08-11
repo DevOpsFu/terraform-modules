@@ -1,9 +1,15 @@
-variable "name" {}
+variable "name" {
+}
 
-variable "location" {}
+variable "location" {
+}
 
-variable "resourceGroupName" {}
+variable "resourceGroupName" {
+}
 
-variable "sku" {}
+variable "sku" {
+}
 
-variable "adminEnabled" {}
+variable "adminEnabled" {
+}
+
