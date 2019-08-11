@@ -13,7 +13,7 @@ variable "aRecords" {
 }
 
 variable "txtRecords" {
-  type    = map(string)
+  type    = map(list(string))
   default = {}
 }
 

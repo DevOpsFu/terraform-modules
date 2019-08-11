@@ -9,7 +9,7 @@ variable "ttl" {
 }
 
 variable "records" {
-  type    = map(string)
+  type    = map(list(string))
   default = {}
 }
 
