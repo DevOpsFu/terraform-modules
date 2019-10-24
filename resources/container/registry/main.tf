@@ -5,4 +5,3 @@ resource "azurerm_container_registry" "containerRegistry" {
   sku                 = var.sku
   admin_enabled       = var.adminEnabled
 }
-
