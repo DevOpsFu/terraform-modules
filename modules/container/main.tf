@@ -1,6 +1,6 @@
 module "resourceGroup" {
   source   = "../../resources/base/resourceGroup"
-  name     = local.resourceGroupName
+  name     = var.resourceGroupName
   location = var.location
 }
 
