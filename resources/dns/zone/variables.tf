@@ -1,5 +1,4 @@
-variable "name" {
-}
+variable "zoneName" {}
 
 variable "resourceGroupName" {
 }

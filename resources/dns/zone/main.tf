@@ -1,5 +1,5 @@
 resource "azurerm_dns_zone" "dnsDomain" {
-  name                = var.name
+  name                = var.zoneName
   resource_group_name = var.resourceGroupName
 }
 

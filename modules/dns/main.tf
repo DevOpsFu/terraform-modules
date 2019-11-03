@@ -1,33 +1,27 @@
-module "resourceGroup" {
-  source   = "../../resources/base/resourceGroup"
-  name     = var.zoneName
-  location = var.location
-}
-
 module "dnsZone" {
   source            = "../../resources/dns/zone"
-  name              = var.zoneName
-  resourceGroupName = module.resourceGroup.name
+  zoneName          = var.dnsZone["zoneName"]
+  resourceGroupName = var.resourceGroupName
 }
 
 module "aRecords" {
   source            = "../../resources/dns/aRecord"
   zoneName          = module.dnsZone.name
-  resourceGroupName = module.resourceGroup.name
-  records           = var.aRecords
+  resourceGroupName = var.resourceGroupName
+  records           = var.dnsZone["aRecords"]
 }
 
 module "cnameRecords" {
   source            = "../../resources/dns/cnameRecord"
   zoneName          = module.dnsZone.name
-  resourceGroupName = module.resourceGroup.name
-  records           = var.cnameRecords
+  resourceGroupName = var.resourceGroupName
+  records           = var.dnsZone["cnameRecords"]
 }
 
 module "txtRecords" {
   source            = "../../resources/dns/txtRecord"
   zoneName          = module.dnsZone.name
-  resourceGroupName = module.resourceGroup.name
-  records           = var.txtRecords
+  resourceGroupName = var.resourceGroupName
+  records           = var.dnsZone["txtRecords"]
 }
 
