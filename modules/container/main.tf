@@ -20,5 +20,6 @@ module "k8sCluster" {
   resourceGroupName = module.resourceGroup.name
   dnsPrefix         = var.name
   agentPoolProfiles = var.k8sAgentPoolProfiles
+  networkProfile    = local.k8sNetworkProfile
   servicePrincipal  = var.k8sServicePrincipal
 }

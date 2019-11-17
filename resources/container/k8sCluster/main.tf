@@ -4,6 +4,14 @@ resource "azurerm_kubernetes_cluster" "k8sCluster" {
   resource_group_name = var.resourceGroupName
   dns_prefix          = var.dnsPrefix
 
+  network_profile {
+    network_plugin     = var.networkProfile.networkPlugin
+    network_policy     = var.networkProfile.networkPolicy
+    dns_service_ip     = var.networkProfile.dnsServiceIp
+    docker_bridge_cidr = var.networkProfile.dockerBridgeCidr
+    service_cidr       = var.networkProfile.serviceCidr
+  }
+
   dynamic "agent_pool_profile" {
     for_each = var.agentPoolProfiles
     content {

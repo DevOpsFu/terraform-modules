@@ -14,6 +14,11 @@ variable "agentPoolProfiles" {
   type = "list"
 }
 
+variable "networkProfile" {
+  type = "map"
+
+}
+
 variable "servicePrincipal" {
   type = "map"
 }

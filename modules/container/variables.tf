@@ -20,3 +20,7 @@ variable "k8sAgentPoolProfiles" {
 variable "k8sServicePrincipal" {
   type = "map"
 }
+
+variable "k8sNetworkProfile" {
+  type = "map"
+}
