@@ -3,6 +3,7 @@ resource "azurerm_kubernetes_cluster" "k8sCluster" {
   location            = var.location
   resource_group_name = var.resourceGroupName
   dns_prefix          = var.dnsPrefix
+  node_resource_group = var.nodeResourceGroup
 
   network_profile {
     network_plugin     = var.networkProfile.networkPlugin
@@ -12,15 +13,10 @@ resource "azurerm_kubernetes_cluster" "k8sCluster" {
     service_cidr       = var.networkProfile.serviceCidr
   }
 
-  dynamic "agent_pool_profile" {
-    for_each = var.agentPoolProfiles
-    content {
-      name            = agent_pool_profile.value.name
-      count           = agent_pool_profile.value.count
-      vm_size         = agent_pool_profile.value.vmSize
-      os_type         = agent_pool_profile.value.osType
-      os_disk_size_gb = agent_pool_profile.value.osDiskSizeGb
-    }
+  default_node_pool {
+    name       = var.defaultNodePool.name
+    node_count = var.defaultNodePool.nodeCount
+    vm_size    = var.defaultNodePool.vmSize
   }
 
   service_principal {

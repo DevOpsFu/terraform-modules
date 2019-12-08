@@ -1,24 +1,44 @@
 variable "name" {
+  type = string
 }
 
 variable "location" {
+  type = string
 }
 
 variable "resourceGroupName" {
+  type = string
 }
 
 variable "dnsPrefix" {
+  type = string
 }
 
-variable "agentPoolProfiles" {
-  type = "list"
+variable "defaultNodePool" {
+  type = object({
+    name      = string,
+    nodeCount = number,
+    vmSize    = string
+  })
+}
+
+variable "nodeResourceGroup" {
+  type = string
 }
 
 variable "networkProfile" {
-  type = "map"
-
+  type = object({
+    networkPlugin    = string,
+    networkPolicy    = string,
+    dnsServiceIp     = string,
+    dockerBridgeCidr = string,
+    serviceCidr      = string
+  })
 }
 
 variable "servicePrincipal" {
-  type = "map"
+  type = object({
+    clientId     = string,
+    clientSecret = string
+  })
 }
