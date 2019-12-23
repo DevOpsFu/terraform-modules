@@ -15,9 +15,10 @@ variable "registryAdminEnabled" {
 
 variable "k8sDefaultNodePool" {
   type = object({
-    name      = string,
-    nodeCount = number,
-    vmSize    = string
+    name         = string,
+    nodeCount    = number,
+    vmSize       = string,
+    vnetSubnetId = string
   })
 }
 
@@ -30,4 +31,12 @@ variable "k8sServicePrincipal" {
 
 variable "k8sNetworkProfile" {
   type = map
+}
+
+variable "virtualNetwork" {
+  type = object({
+    addressSpace = list(string),
+    dnsServers   = list(string),
+    subnets      = list(map(string))
+  })
 }

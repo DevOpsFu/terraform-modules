@@ -16,9 +16,10 @@ variable "dnsPrefix" {
 
 variable "defaultNodePool" {
   type = object({
-    name      = string,
-    nodeCount = number,
-    vmSize    = string
+    name         = string,
+    nodeCount    = number,
+    vmSize       = string,
+    vnetSubnetId = string
   })
 }
 

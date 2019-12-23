@@ -9,3 +9,7 @@ output "registryAdminUsername" {
 output "registryAdminPassword" {
   value = module.containerRegistry.admin_password
 }
+
+output "subnetIds" {
+  value = module.virtualNetwork.subnetIds
+}

@@ -14,9 +14,10 @@ resource "azurerm_kubernetes_cluster" "k8sCluster" {
   }
 
   default_node_pool {
-    name       = var.defaultNodePool.name
-    node_count = var.defaultNodePool.nodeCount
-    vm_size    = var.defaultNodePool.vmSize
+    name           = var.defaultNodePool.name
+    node_count     = var.defaultNodePool.nodeCount
+    vm_size        = var.defaultNodePool.vmSize
+    vnet_subnet_id = var.defaultNodePool.vnetSubnetId
   }
 
   service_principal {

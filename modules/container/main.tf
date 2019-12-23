@@ -13,11 +13,16 @@ module "containerRegistry" {
   adminEnabled      = var.registryAdminEnabled
 }
 
-/*
 module "virtualNetwork" {
-    source            = "../../resources/network/virtualNetwork"
+  source            = "../../resources/network/virtualNetwork"
+  name              = var.name
+  location          = var.location
+  resourceGroupName = module.resourceGroup.name
+  addressSpace      = var.virtualNetwork.addressSpace
+  dnsServers        = var.virtualNetwork.dnsServers
+  subnets           = var.virtualNetwork.subnets
 }
-*/
+
 
 module "k8sCluster" {
   source            = "../../resources/container/k8sCluster"
@@ -26,7 +31,7 @@ module "k8sCluster" {
   resourceGroupName = module.resourceGroup.name
   dnsPrefix         = var.name
   nodeResourceGroup = local.k8sNodeResourceGroup
-  defaultNodePool   = var.k8sDefaultNodePool
+  defaultNodePool   = local.k8sDefaultNodePool
   networkProfile    = local.k8sNetworkProfile
   servicePrincipal  = var.k8sServicePrincipal
 }

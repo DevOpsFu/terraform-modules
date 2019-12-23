@@ -8,11 +8,11 @@ variable "resourceGroupName" {
 }
 
 variable "addressSpace" {
-  type = "list"
+  type = list(string)
 }
 
 variable "dnsServers" {
-  type    = list
+  type    = list(string)
   default = null
 }
 
