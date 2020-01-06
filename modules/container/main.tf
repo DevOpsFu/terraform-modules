@@ -13,6 +13,7 @@ module "containerRegistry" {
   adminEnabled      = var.registryAdminEnabled
 }
 
+/*
 module "virtualNetwork" {
   source            = "../../resources/network/virtualNetwork"
   name              = var.name
@@ -22,6 +23,7 @@ module "virtualNetwork" {
   dnsServers        = var.virtualNetwork.dnsServers
   subnets           = var.virtualNetwork.subnets
 }
+*/
 
 
 module "k8sCluster" {
@@ -34,4 +36,9 @@ module "k8sCluster" {
   defaultNodePool   = local.k8sDefaultNodePool
   networkProfile    = local.k8sNetworkProfile
   servicePrincipal  = var.k8sServicePrincipal
+}
+
+resource "local_file" "kubeConfig" {
+    content  = module.k8sCluster.kube_config
+    filename = "${var.kubeConfigDir}/config"
 }
