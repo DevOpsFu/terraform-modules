@@ -1,11 +1,11 @@
 module "resourceGroup" {
-  source   = "../../resources/base/resourceGroup"
+  source   = "../../resources/azurerm/base/resourceGroup"
   name     = var.resourceGroupName
   location = var.location
 }
 
 module "mariadbServer" {
-  source            = "../../resources/database/mariadb/server"
+  source            = "../../resources/azurerm/database/mariadb/server"
   name              = var.name
   location          = var.location
   resourceGroupName = module.resourceGroup.name

@@ -1,11 +1,11 @@
 module "resourceGroup" {
-  source   = "../../resources/base/resourceGroup"
+  source   = "../../resources/azurerm/base/resourceGroup"
   name     = local.resourceGroupName
   location = var.location
 }
 
 module "storageAccount" {
-  source            = "../../resources/storage/account"
+  source            = "../../resources/azurerm/storage/account"
   name              = local.storageAccountName
   resourceGroupName = module.resourceGroup.name
   location          = var.location
@@ -14,7 +14,7 @@ module "storageAccount" {
 }
 
 module "servicePlan" {
-  source            = "../../resources/appServices/servicePlan"
+  source            = "../../resources/azurerm/appServices/servicePlan"
   name              = local.planName
   resourceGroupName = module.resourceGroup.name
   location          = var.location
@@ -24,7 +24,7 @@ module "servicePlan" {
 }
 
 module "functionApp" {
-  source                  = "../../resources/appServices/functionApp"
+  source                  = "../../resources/azurerm/appServices/functionApp"
   name                    = var.appName
   resourceGroupName       = module.resourceGroup.name
   location                = var.location

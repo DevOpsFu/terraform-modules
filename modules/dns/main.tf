@@ -1,25 +1,25 @@
 module "dnsZone" {
-  source            = "../../resources/dns/zone"
+  source            = "../../resources/azurerm/dns/zone"
   zoneName          = var.dnsZone["zoneName"]
   resourceGroupName = var.resourceGroupName
 }
 
 module "aRecords" {
-  source            = "../../resources/dns/aRecord"
+  source            = "../../resources/azurerm/dns/aRecord"
   zoneName          = module.dnsZone.name
   resourceGroupName = var.resourceGroupName
   records           = var.dnsZone["aRecords"]
 }
 
 module "cnameRecords" {
-  source            = "../../resources/dns/cnameRecord"
+  source            = "../../resources/azurerm/dns/cnameRecord"
   zoneName          = module.dnsZone.name
   resourceGroupName = var.resourceGroupName
   records           = var.dnsZone["cnameRecords"]
 }
 
 module "txtRecords" {
-  source            = "../../resources/dns/txtRecord"
+  source            = "../../resources/azurerm/dns/txtRecord"
   zoneName          = module.dnsZone.name
   resourceGroupName = var.resourceGroupName
   records           = var.dnsZone["txtRecords"]

@@ -1,11 +1,11 @@
 module "resourceGroup" {
-  source   = "../../resources/base/resourceGroup"
+  source   = "../../resources/azurerm/base/resourceGroup"
   name     = var.resourceGroupName
   location = var.location
 }
 
 module "containerRegistry" {
-  source            = "../../resources/container/registry"
+  source            = "../../resources/azurerm/container/registry"
   name              = local.registryName
   location          = var.location
   resourceGroupName = module.resourceGroup.name
@@ -15,7 +15,7 @@ module "containerRegistry" {
 
 /*
 module "virtualNetwork" {
-  source            = "../../resources/network/virtualNetwork"
+  source            = "../../resources/azurerm/network/virtualNetwork"
   name              = var.name
   location          = var.location
   resourceGroupName = module.resourceGroup.name
@@ -27,7 +27,7 @@ module "virtualNetwork" {
 
 
 module "k8sCluster" {
-  source            = "../../resources/container/k8sCluster"
+  source            = "../../resources/azurerm/container/k8sCluster"
   name              = local.k8sClusterName
   location          = var.location
   resourceGroupName = module.resourceGroup.name
@@ -39,6 +39,6 @@ module "k8sCluster" {
 }
 
 resource "local_file" "kubeConfig" {
-    content  = module.k8sCluster.kube_config
-    filename = "${var.kubeConfigDir}/config"
+  content  = module.k8sCluster.kube_config
+  filename = "${var.kubeConfigDir}/config"
 }
