@@ -13,19 +13,6 @@ module "containerRegistry" {
   adminEnabled      = var.registryAdminEnabled
 }
 
-/*
-module "virtualNetwork" {
-  source            = "../../resources/azurerm/network/virtualNetwork"
-  name              = var.name
-  location          = var.location
-  resourceGroupName = module.resourceGroup.name
-  addressSpace      = var.virtualNetwork.addressSpace
-  dnsServers        = var.virtualNetwork.dnsServers
-  subnets           = var.virtualNetwork.subnets
-}
-*/
-
-
 module "k8sCluster" {
   source            = "../../resources/azurerm/container/k8sCluster"
   name              = local.k8sClusterName
@@ -38,7 +25,67 @@ module "k8sCluster" {
   servicePrincipal  = var.k8sServicePrincipal
 }
 
-resource "local_file" "kubeConfig" {
-  content  = module.k8sCluster.kube_config
-  filename = "${var.kubeConfigDir}/config"
+module "linkerdTrustAnchorCert" {
+  source              = "../../resources/tls/selfSignedCert"
+  keyAlgorithm        = "ECDSA"
+  ecdsaCurve          = "P256"
+  validityPeriodHours = 87600
+  isCaCertificate     = true
+  allowedUses         = ["crl_signing", "cert_signing", "server_auth", "client_auth"]
+
+  subject = {
+    commonName         = "identity.linkerd.cluster.local"
+    organization       = null
+    organizationalUnit = null
+    steetAddress       = null
+    locality           = null
+    province           = null
+    country            = null
+    postalCode         = null
+    serialNumber       = null
+  }
+}
+
+module "linkerdIssuerCert" {
+  source              = "../../resources/tls/locallySignedCert"
+  keyAlgorithm        = "ECDSA"
+  ecdsaCurve          = "P256"
+  validityPeriodHours = 43800
+  isCaCertificate     = true
+  caKeyAlgorithm      = module.linkerdTrustAnchorCert.keyAlgorithm
+  caPrivateKeyPem     = module.linkerdTrustAnchorCert.privateKeyPem
+  caCertPem           = module.linkerdTrustAnchorCert.certPem
+  allowedUses         = ["crl_signing", "cert_signing", "server_auth", "client_auth"]
+
+  subject = {
+    commonName         = "identity.linkerd.cluster.local"
+    organization       = null
+    organizationalUnit = null
+    steetAddress       = null
+    locality           = null
+    province           = null
+    country            = null
+    postalCode         = null
+    serialNumber       = null
+  }
+}
+
+module "linkerdHelmRelease" {
+  source                   = "../../resources/helm/release/linkerd"
+  identityTrustAnchorCert  = module.linkerdTrustAnchorCert.certPem
+  identityIssuerCertExpiry = module.linkerdIssuerCert.validityEndTime
+  identityIssuerCert       = module.linkerdIssuerCert.certPem
+  identityIssuerCertKey    = module.linkerdIssuerCert.privateKeyPem
+}
+
+
+module "k8sNamespaces" {
+  source = "../../resources/kubernetes/namespace"
+  namespaces = {
+      test1 = {
+        annotations = {
+          "linkerd.io/inject" = "enabled"
+        }
+      }
+    }
 }

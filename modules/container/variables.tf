@@ -40,7 +40,3 @@ variable "virtualNetwork" {
     subnets      = list(map(string))
   })
 }
-
-variable "kubeConfigDir" {
-  type = string
-}

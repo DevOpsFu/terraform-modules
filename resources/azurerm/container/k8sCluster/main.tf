@@ -24,16 +24,27 @@ resource "azurerm_kubernetes_cluster" "k8sCluster" {
     client_id     = var.servicePrincipal.clientId
     client_secret = var.servicePrincipal.clientSecret
   }
+
+  addon_profile {
+
+    aci_connector_linux {
+      enabled = false
+    }
+
+    azure_policy {
+      enabled = false
+    }
+
+    kube_dashboard {
+      enabled = true
+    }
+
+    http_application_routing {
+      enabled = false
+    }
+
+    oms_agent {
+      enabled = false
+    }
+  }
 }
-
-/*
-
-output "client_certificate" {
-  value = "${azurerm_kubernetes_cluster.test.kube_config.0.client_certificate}"
-}
-
-output "kube_config" {
-  value = "${azurerm_kubernetes_cluster.test.kube_config_raw}"
-}
-
-*/

@@ -10,12 +10,19 @@ output "registryAdminPassword" {
   value = module.containerRegistry.admin_password
 }
 
-output "kubeConfig" {
-  value = module.k8sCluster.kube_config
+output k8sHost {
+  value = module.k8sCluster.host
 }
 
-/*
-output "subnetIds" {
-  value = module.virtualNetwork.subnetIds
+output k8sClientKey {
+  value = module.k8sCluster.clientKey
 }
-*/
+
+output k8sClientCertificate {
+  value = module.k8sCluster.clientCertificate
+}
+
+output k8sClusterCaCertificate {
+  value = module.k8sCluster.clusterCaCertificate
+}
+
