@@ -13,3 +13,8 @@ module "mariadbServer" {
   sku               = var.sku
   storageProfile    = var.storageProfile
 }
+
+module "k8sExternalName" {
+  source               = "../../resources/kubernetes/externalNameService"
+  externalNameServices = local.externalNameService
+}
