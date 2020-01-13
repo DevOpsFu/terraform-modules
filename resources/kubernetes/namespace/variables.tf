@@ -1,9 +1,6 @@
 variable namespaces {
-  type = map(map(map(string)))
+  type = map(object({
+    annotations = map(string),
+    labels      = map(string)
+  }))
 }
-
-/*
-variable annotations {
-  type = map(map(string))
-}
-*/

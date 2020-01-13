@@ -25,6 +25,11 @@ module "k8sCluster" {
   servicePrincipal  = var.k8sServicePrincipal
 }
 
+module "k8sNamespaces" {
+  source     = "../../resources/kubernetes/namespace"
+  namespaces = var.k8sNamespaces
+}
+
 module "linkerdTrustAnchorCert" {
   source              = "../../resources/tls/selfSignedCert"
   keyAlgorithm        = "ECDSA"
@@ -78,14 +83,3 @@ module "linkerdHelmRelease" {
   identityIssuerCertKey    = module.linkerdIssuerCert.privateKeyPem
 }
 
-
-module "k8sNamespaces" {
-  source = "../../resources/kubernetes/namespace"
-  namespaces = {
-      test1 = {
-        annotations = {
-          "linkerd.io/inject" = "enabled"
-        }
-      }
-    }
-}

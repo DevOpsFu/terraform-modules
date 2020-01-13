@@ -33,6 +33,13 @@ variable "k8sNetworkProfile" {
   type = map
 }
 
+variable "k8sNamespaces" {
+  type = map(object({
+    annotations = map(string),
+    labels      = map(string)
+  }))
+}
+
 variable "virtualNetwork" {
   type = object({
     addressSpace = list(string),

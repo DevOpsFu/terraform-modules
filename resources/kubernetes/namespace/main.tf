@@ -4,5 +4,6 @@ resource kubernetes_namespace namespace {
   metadata {
     name        = each.key
     annotations = each.value["annotations"]
+    labels      = each.value["labels"]
   }
 }
