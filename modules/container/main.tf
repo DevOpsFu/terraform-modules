@@ -30,6 +30,21 @@ module "k8sNamespaces" {
   namespaces = var.k8sNamespaces
 }
 
+module "registrySecret" {
+  source = "../../resources/kubernetes/secret/dockerconfig"
+  metadata = {
+    name        ="test1"
+    annotations = {}
+    labels      = {}
+    namespace   = "ghost"
+  }
+  credentials = {
+    username = module.containerRegistry.admin_username
+    password = module.containerRegistry.admin_password
+  }
+  fqdn = module.containerRegistry.login_server
+}
+
 module "linkerdTrustAnchorCert" {
   source              = "../../resources/tls/selfSignedCert"
   keyAlgorithm        = "ECDSA"
