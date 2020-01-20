@@ -33,10 +33,10 @@ module "k8sNamespaces" {
 module "registrySecret" {
   source = "../../resources/kubernetes/secret/dockerconfig"
   metadata = {
-    name        ="test1"
+    name        ="devopsfu"
     annotations = {}
     labels      = {}
-    namespace   = "ghost"
+    namespace   = "metrics"
   }
   credentials = {
     username = module.containerRegistry.admin_username

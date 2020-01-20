@@ -1,9 +1,9 @@
 ${jsonencode({
   "auths" = { 
-      "${fqdn}" = {
-        "username" = "${username}",
-        "password" = "${password}",
-        "auth"     = "${encodedAuth}"
-      }
+    "${fqdn}" = {
+      "username" = "${username}",
+      "password" = "${password}",
+      "auth"     = "${encodedAuth}"
     }
+  }
 })}
