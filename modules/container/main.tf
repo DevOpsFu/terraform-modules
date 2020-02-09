@@ -32,17 +32,20 @@ module "k8sNamespaces" {
 
 module "registrySecret" {
   source = "../../resources/kubernetes/secret/dockerconfig"
-  metadata = {
-    name        ="devopsfu"
-    annotations = {}
-    labels      = {}
-    namespace   = "metrics"
+  dockerConfigSecrets = {
+    devopsfu = {
+      metadata = {
+        annotations = {}
+        labels      = {}
+        namespace   = "ghost"
+      }
+      fqdn = module.containerRegistry.login_server
+      credentials = {
+        username = module.containerRegistry.admin_username
+        password = module.containerRegistry.admin_password
+      }
+    }
   }
-  credentials = {
-    username = module.containerRegistry.admin_username
-    password = module.containerRegistry.admin_password
-  }
-  fqdn = module.containerRegistry.login_server
 }
 
 module "linkerdTrustAnchorCert" {

@@ -47,7 +47,7 @@ variable "k8sNamespace" {
   default = null
 }
 
-variable "k8sAnnotations" = {
+variable "k8sAnnotations" {
   type    = map(string)
   default = {}
 }
