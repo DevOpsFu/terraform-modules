@@ -14,3 +14,6 @@ output clusterCaCertificate {
   value = module.kubernetesCluster.clusterCaCertificate
 }
 
+output kubeConfigRaw {
+  value = module.kubernetesCluster.kubeConfigRaw
+}

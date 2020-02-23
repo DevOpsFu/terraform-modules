@@ -1,11 +1,11 @@
 module "resourceGroup" {
-  source   = "../../resources/azurerm/base/resourceGroup"
+  source   = "../../../resources/azurerm/base/resourceGroup"
   name     = var.resourceGroupName
   location = var.location
 }
 
 module "kubernetesCluster" {
-  source            = "../../resources/azurerm/container/kubernetesCluster"
+  source            = "../../../resources/azurerm/container/kubernetesCluster"
   name              = var.name
   location          = var.location
   resourceGroupName = module.resourceGroup.name
@@ -17,32 +17,12 @@ module "kubernetesCluster" {
 }
 
 module "kubernetesNamespaces" {
-  source     = "../../resources/kubernetes/namespace"
+  source     = "../../../resources/kubernetes/namespace"
   namespaces = var.namespaces
 }
 
-/*
-module "registrySecret" {
-  source = "../../resources/kubernetes/secret/dockerconfig"
-  dockerConfigSecrets = {
-    devopsfu = {
-      metadata = {
-        annotations = {}
-        labels      = {}
-        namespace   = "ghost"
-      }
-      fqdn = module.containerRegistry.login_server
-      credentials = {
-        username = module.containerRegistry.admin_username
-        password = module.containerRegistry.admin_password
-      }
-    }
-  }
-}
-*/
-
 module "linkerdTrustAnchorCert" {
-  source              = "../../resources/tls/selfSignedCert"
+  source              = "../../../resources/tls/selfSignedCert"
   keyAlgorithm        = "ECDSA"
   ecdsaCurve          = "P256"
   validityPeriodHours = 87600
@@ -63,7 +43,7 @@ module "linkerdTrustAnchorCert" {
 }
 
 module "linkerdIssuerCert" {
-  source              = "../../resources/tls/locallySignedCert"
+  source              = "../../../resources/tls/locallySignedCert"
   keyAlgorithm        = "ECDSA"
   ecdsaCurve          = "P256"
   validityPeriodHours = 43800
@@ -87,7 +67,7 @@ module "linkerdIssuerCert" {
 }
 
 module "linkerdHelmRelease" {
-  source                   = "../../resources/helm/release/linkerd"
+  source                   = "../../../resources/helm/release/linkerd"
   identityTrustAnchorCert  = module.linkerdTrustAnchorCert.certPem
   identityIssuerCertExpiry = module.linkerdIssuerCert.validityEndTime
   identityIssuerCert       = module.linkerdIssuerCert.certPem

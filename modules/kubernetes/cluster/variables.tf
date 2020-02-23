@@ -33,11 +33,3 @@ variable "namespaces" {
     labels      = map(string)
   }))
 }
-
-variable "virtualNetwork" {
-  type = object({
-    addressSpace = list(string),
-    dnsServers   = list(string),
-    subnets      = list(map(string))
-  })
-}

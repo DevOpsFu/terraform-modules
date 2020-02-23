@@ -13,3 +13,7 @@ output clientCertificate {
 output clusterCaCertificate {
   value = azurerm_kubernetes_cluster.kubernetesCluster.kube_config.0.cluster_ca_certificate
 }
+
+output kubeConfigRaw {
+  value = azurerm_kubernetes_cluster.kubernetesCluster.kube_config_raw
+}
