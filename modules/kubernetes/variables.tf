@@ -7,13 +7,7 @@ variable "resourceGroupName" {
 variable "location" {
 }
 
-variable "registrySku" {
-}
-
-variable "registryAdminEnabled" {
-}
-
-variable "k8sDefaultNodePool" {
+variable "defaultNodePool" {
   type = object({
     name         = string,
     nodeCount    = number,
@@ -22,18 +16,18 @@ variable "k8sDefaultNodePool" {
   })
 }
 
-variable "k8sServicePrincipal" {
+variable "servicePrincipal" {
   type = object({
     clientId     = string,
     clientSecret = string
   })
 }
 
-variable "k8sNetworkProfile" {
+variable "networkProfile" {
   type = map
 }
 
-variable "k8sNamespaces" {
+variable "namespaces" {
   type = map(object({
     annotations = map(string),
     labels      = map(string)

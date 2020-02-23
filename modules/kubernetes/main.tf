@@ -4,32 +4,24 @@ module "resourceGroup" {
   location = var.location
 }
 
-module "containerRegistry" {
-  source            = "../../resources/azurerm/container/registry"
-  name              = local.registryName
-  location          = var.location
-  resourceGroupName = module.resourceGroup.name
-  sku               = var.registrySku
-  adminEnabled      = var.registryAdminEnabled
-}
-
-module "k8sCluster" {
-  source            = "../../resources/azurerm/container/k8sCluster"
-  name              = local.k8sClusterName
+module "kubernetesCluster" {
+  source            = "../../resources/azurerm/container/kubernetesCluster"
+  name              = var.name
   location          = var.location
   resourceGroupName = module.resourceGroup.name
   dnsPrefix         = var.name
-  nodeResourceGroup = local.k8sNodeResourceGroup
-  defaultNodePool   = local.k8sDefaultNodePool
-  networkProfile    = local.k8sNetworkProfile
-  servicePrincipal  = var.k8sServicePrincipal
+  nodeResourceGroup = local.nodeResourceGroup
+  defaultNodePool   = local.defaultNodePool
+  networkProfile    = local.networkProfile
+  servicePrincipal  = var.servicePrincipal
 }
 
-module "k8sNamespaces" {
+module "kubernetesNamespaces" {
   source     = "../../resources/kubernetes/namespace"
-  namespaces = var.k8sNamespaces
+  namespaces = var.namespaces
 }
 
+/*
 module "registrySecret" {
   source = "../../resources/kubernetes/secret/dockerconfig"
   dockerConfigSecrets = {
@@ -47,6 +39,7 @@ module "registrySecret" {
     }
   }
 }
+*/
 
 module "linkerdTrustAnchorCert" {
   source              = "../../resources/tls/selfSignedCert"

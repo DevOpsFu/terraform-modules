@@ -1,4 +1,4 @@
-resource "azurerm_kubernetes_cluster" "k8sCluster" {
+resource "azurerm_kubernetes_cluster" "kubernetesCluster" {
   name                = var.name
   location            = var.location
   resource_group_name = var.resourceGroupName

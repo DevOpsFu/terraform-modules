@@ -9,22 +9,22 @@ resource "helm_release" "linkerd" {
   chart      = "linkerd/linkerd2"
 
   set {
-    name  = "Identity.TrustAnchorsPEM"
+    name  = "global.identityTrustAnchorsPEM"
     value = var.identityTrustAnchorCert
   }
 
   set {
-    name  = "Identity.Issuer.CrtExpiry"
+    name  = "identity.issuer.crtExpiry"
     value = var.identityIssuerCertExpiry
   }
 
   set {
-    name  = "Identity.Issuer.TLS.CrtPEM"
+    name  = "identity.issuer.tls.crtPEM"
     value = var.identityIssuerCert
   }
 
   set {
-    name  = "Identity.Issuer.TLS.KeyPEM"
+    name  = "identity.issuer.tls.keyPEM"
     value = var.identityIssuerCertKey
   }
 }
