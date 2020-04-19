@@ -14,6 +14,7 @@ module "kubernetesCluster" {
   defaultNodePool   = local.defaultNodePool
   networkProfile    = local.networkProfile
   servicePrincipal  = var.servicePrincipal
+  windowsProfile    = var.windowsProfile
 }
 
 module "kubernetesNamespaces" {
@@ -73,4 +74,5 @@ module "linkerdHelmRelease" {
   identityIssuerCert       = module.linkerdIssuerCert.certPem
   identityIssuerCertKey    = module.linkerdIssuerCert.privateKeyPem
 }
+
 

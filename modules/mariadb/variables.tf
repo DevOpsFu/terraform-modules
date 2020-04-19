@@ -19,13 +19,8 @@ variable "serverConfig" {
   })
 }
 
-variable "sku" {
-  type = object({
-    name     = string,
-    capacity = string,
-    tier     = string,
-    family   = string
-  })
+variable "skuName" {
+  type = string
 }
 
 variable "storageProfile" {
@@ -37,22 +32,3 @@ variable "storageProfile" {
   })
 }
 
-variable "k8sRegisterExternalName" {
-  type    = bool
-  default = false
-}
-
-variable "k8sNamespace" {
-  type    = string
-  default = null
-}
-
-variable "k8sAnnotations" {
-  type    = map(string)
-  default = {}
-}
-
-variable "k8sLabels" {
-  type    = map(string)
-  default = {}
-}

@@ -9,12 +9,8 @@ module "mariadbServer" {
   name              = var.name
   location          = var.location
   resourceGroupName = module.resourceGroup.name
+  skuName           = var.skuName
   serverConfig      = var.serverConfig
-  sku               = var.sku
   storageProfile    = var.storageProfile
 }
 
-module "k8sExternalName" {
-  source               = "../../resources/kubernetes/externalNameService"
-  externalNameServices = local.externalNameService
-}

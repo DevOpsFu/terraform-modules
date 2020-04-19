@@ -25,6 +25,11 @@ resource "azurerm_kubernetes_cluster" "kubernetesCluster" {
     client_secret = var.servicePrincipal.clientSecret
   }
 
+  windows_profile {
+    admin_username = var.windowsProfile.adminUsername
+    admin_password = var.windowsProfile.adminPassword
+  }
+
   addon_profile {
 
     aci_connector_linux {

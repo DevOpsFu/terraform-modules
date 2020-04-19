@@ -37,6 +37,13 @@ variable "networkProfile" {
   })
 }
 
+variable "windowsProfile" {
+  type = object({
+    adminUsername = string,
+    adminPassword = string
+  })
+}
+
 variable "servicePrincipal" {
   type = object({
     clientId     = string,

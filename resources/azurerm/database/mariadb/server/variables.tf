@@ -19,13 +19,8 @@ variable "serverConfig" {
   })
 }
 
-variable "sku" {
-  type = object({
-    name     = string,
-    capacity = string,
-    tier     = string,
-    family   = string
-  })
+variable "skuName" {
+  type = string
 }
 
 variable "storageProfile" {

@@ -27,6 +27,13 @@ variable "networkProfile" {
   type = map
 }
 
+variable "windowsProfile" {
+  type = object({
+    adminUsername = string,
+    adminPassword = string
+  })
+}
+
 variable "namespaces" {
   type = map(object({
     annotations = map(string),
